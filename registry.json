@@ -8,42 +8,42 @@
       "name": "Adafruit Feather nRF52840 Express",
       "vendor": "adafruit",
       "platform": "nrf",
-      "path": "adafruit/feather_nrf52840_express.json"
+      "path": "nrf/adafruit/feather_nrf52840_express.json"
     },
     {
       "id": "nrf52840_dk",
       "name": "Nordic nRF52840 DK",
       "vendor": "nordic",
       "platform": "nrf",
-      "path": "nordic/nrf52840_dk.json"
+      "path": "nrf/nordic/nrf52840_dk.json"
     },
     {
       "id": "sparkfun_thing_plus_nrf52840",
       "name": "SparkFun Thing Plus - nRF52840",
       "vendor": "sparkfun",
       "platform": "nrf",
-      "path": "sparkfun/thing_plus_nrf52840.json"
+      "path": "nrf/sparkfun/thing_plus_nrf52840.json"
     },
     {
       "id": "esp32_devkitc",
       "name": "ESP32-DevKitC",
       "vendor": "espressif",
       "platform": "esp32",
-      "path": "espressif/esp32_devkitc.json"
+      "path": "esp32/espressif/esp32_devkitc.json"
     },
     {
       "id": "raspberry_pi_pico",
       "name": "Raspberry Pi Pico",
       "vendor": "raspberry_pi",
       "platform": "rp2040",
-      "path": "raspberry_pi/pico.json"
+      "path": "rp2040/raspberry_pi/pico.json"
     },
     {
       "id": "bluepill_stm32f103c8",
       "name": "STM32 Blue Pill (F103C8)",
       "vendor": "generic",
       "platform": "stm32",
-      "path": "generic/bluepill_stm32f103c8.json"
+      "path": "stm32/generic/bluepill_stm32f103c8.json"
     }
   ],
   "platforms": {
