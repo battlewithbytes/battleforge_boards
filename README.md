@@ -8,12 +8,16 @@ Board definitions, platform configurations, and libraries for the BattleForge em
 battleforge_boards/
 ├── registry.json           # Main index file
 ├── schema/                 # JSON Schema definitions
-│   ├── platform-v1.schema.json
+│   ├── platform-v1.schema.json   # Legacy embedded files format
+│   ├── platform-v2.schema.json   # External GitHub sources format
 │   ├── board-v1.schema.json
 │   └── library-v1.schema.json
-├── platforms/              # Platform configurations
+├── platforms/              # Platform family manifests
 │   ├── stm32/
-│   │   └── platform.json
+│   │   ├── platform.json         # Platform metadata
+│   │   └── f1/
+│   │       ├── manifest.json     # v1: embedded headers/linkers
+│   │       └── manifest-v2.json  # v2: GitHub source references
 │   ├── esp32/
 │   ├── nrf/
 │   └── rp2040/
@@ -29,6 +33,8 @@ battleforge_boards/
 │   ├── wire/
 │   └── spi/
 ├── images/                 # Board images
+├── wasm/                   # WASM compiler manifests
+│   └── manifest.json       # Compiler versions and hashes
 └── scripts/
     └── wasm/               # WASM compiler build scripts
 ```
@@ -39,6 +45,25 @@ battleforge_boards/
 2. User selects a platform (STM32, ESP32, etc.)
 3. Platform's `index.json` lists available boards
 4. Board's manifest provides build configuration
+5. Platform family manifest (v1 or v2) provides headers/startup/linker files
+
+## Manifest Versions: v1 vs v2
+
+BattleForge supports two manifest formats for platform families:
+
+### v1 (Legacy - Embedded Files)
+- Headers, startup files, and linker scripts are stored directly in this repository
+- Files bundled with the app at build time
+- Suitable for small platforms or when offline support is critical
+
+### v2 (Current - External GitHub Sources)
+- References external GitHub repositories (e.g., ST's official CMSIS repos)
+- Files fetched at runtime via `SourceFetcher.ts`
+- Always up-to-date with vendor SDKs
+- Smaller repository size
+- Requires network access
+
+BattleForge tries to load `manifest-v2.json` first, falling back to `manifest.json` (v1).
 
 ## Adding a New Board
 
@@ -196,6 +221,128 @@ Add to the platforms array:
 }
 ```
 
+## Adding a Platform Family (v2 Manifest)
+
+The v2 manifest format references external GitHub repositories for SDK files instead of embedding them.
+
+### Create `platforms/{platform}/{family}/manifest-v2.json`
+
+```json
+{
+  "$schema": "../../../../schema/platform-v2.schema.json",
+  "schemaVersion": "2.0.0",
+  "platform": "stm32",
+  "family": "f1",
+  "name": "STM32F1 Series",
+  "description": "STM32F1 Cortex-M3 microcontrollers",
+  "architecture": "cortex-m3",
+  "version": "2.0.0",
+
+  "sources": {
+    "cmsis": {
+      "repo": "github:STMicroelectronics/cmsis_device_f1",
+      "ref": "master",
+      "paths": {
+        "headers": "Include",
+        "startup": "Source/Templates/gcc",
+        "linker": "Source/Templates/gcc/linker",
+        "system": "Source/Templates"
+      },
+      "files": {
+        "headers": [
+          "stm32f1xx.h",
+          "stm32f103xb.h",
+          "system_stm32f1xx.h"
+        ],
+        "system": ["system_stm32f1xx.c"]
+      }
+    },
+    "cmsis_core": {
+      "repo": "github:STMicroelectronics/cmsis_core",
+      "ref": "master",
+      "paths": {
+        "headers": "Include"
+      },
+      "files": {
+        "headers": ["core_cm3.h", "cmsis_gcc.h", "cmsis_compiler.h"]
+      }
+    }
+  },
+
+  "devices": [
+    {
+      "id": "stm32f103c8",
+      "name": "STM32F103C8",
+      "flash": 65536,
+      "ram": 20480,
+      "frequency": 72000000,
+      "defines": ["STM32F103xB", "STM32F1"],
+      "fpu": "none",
+      "files": {
+        "startup": "startup_stm32f103xb.s",
+        "linker": "STM32F103XB_FLASH.ld",
+        "header": "stm32f103xb.h"
+      }
+    }
+  ],
+
+  "build": {
+    "compilerFlags": [
+      "--target=thumbv7m-none-eabi",
+      "-mcpu=cortex-m3",
+      "-mthumb",
+      "-mfloat-abi=soft"
+    ],
+    "linkerFlags": ["--gc-sections"],
+    "defines": ["USE_HAL_DRIVER"]
+  },
+
+  "frameworks": {
+    "arduino": {
+      "core": "stm32duino",
+      "coreUrl": "https://github.com/stm32duino/Arduino_Core_STM32",
+      "packageIndex": "https://github.com/stm32duino/BoardManagerFiles/raw/main/package_stmicroelectronics_index.json"
+    },
+    "native": {
+      "sdk": "stm32cube",
+      "sdkVersion": "1.8.5"
+    }
+  }
+}
+```
+
+### v2 Sources Schema
+
+The `sources` object defines external repositories:
+
+| Field | Required | Description |
+|-------|----------|-------------|
+| `repo` | Yes | Repository in format `github:owner/repo` or full URL |
+| `ref` | No | Git ref (branch, tag, commit). Default: `master` |
+| `paths.headers` | No | Directory containing header files |
+| `paths.startup` | No | Directory containing startup assembly files |
+| `paths.linker` | No | Directory containing linker scripts |
+| `paths.system` | No | Directory containing system init files |
+| `files.headers` | No | Specific header files to fetch |
+| `files.system` | No | Specific system files to include in project |
+
+### v2 Device Definition
+
+Each device in the `devices` array:
+
+| Field | Required | Description |
+|-------|----------|-------------|
+| `id` | Yes | Device identifier (e.g., `stm32f103c8`) |
+| `name` | Yes | Human-readable name |
+| `flash` | Yes | Flash size in bytes |
+| `ram` | Yes | RAM size in bytes |
+| `frequency` | Yes | CPU frequency in Hz |
+| `defines` | No | Device-specific preprocessor defines |
+| `fpu` | No | FPU config: `none`, `soft`, `softfp`, `hard` |
+| `files.startup` | No | Startup file name (from sources paths) |
+| `files.linker` | No | Linker script name (from sources paths) |
+| `files.header` | No | Device-specific header file |
+
 ## Adding a Library
 
 ### Step 1: Create Library Manifest
@@ -309,18 +456,23 @@ stm32/generic/examples/
 
 ### Supported Architectures
 
-| Architecture | Platforms |
-|--------------|-----------|
-| `cortex-m0` | STM32F0, nRF51 |
-| `cortex-m0+` | STM32L0, RP2040 |
-| `cortex-m3` | STM32F1, STM32F2 |
-| `cortex-m4` | STM32F3, STM32F4, nRF52 |
-| `cortex-m4f` | STM32F4 (with FPU) |
-| `cortex-m7` | STM32F7, STM32H7 |
-| `cortex-m33` | STM32L5, STM32U5 |
-| `riscv32` | ESP32-C3, ESP32-C6 |
-| `xtensa-lx6` | ESP32 |
-| `xtensa-lx7` | ESP32-S2, ESP32-S3 |
+| Architecture | Platforms | WASM Compiler |
+|--------------|-----------|---------------|
+| `cortex-m0` | STM32F0, nRF51 | clang-arm |
+| `cortex-m0+` | STM32L0, RP2040 | clang-arm |
+| `cortex-m3` | STM32F1, STM32F2 | clang-arm |
+| `cortex-m4` | STM32F3, STM32F4, nRF52 | clang-arm |
+| `cortex-m4f` | STM32F4 (with FPU) | clang-arm |
+| `cortex-m7` | STM32F7, STM32H7 | clang-arm |
+| `cortex-m7f` | STM32F7, STM32H7 (with FPU) | clang-arm |
+| `cortex-m23` | STM32L0+, secure IoT | clang-arm |
+| `cortex-m33` | STM32L5, STM32U5 | clang-arm |
+| `cortex-m55` | STM32U5 (ML) | clang-arm |
+| `riscv32` | ESP32-C3, ESP32-C6, ESP32-H2 | clang-riscv |
+| `riscv32imc` | ESP32-C3 (compact) | clang-riscv |
+| `riscv32imac` | ESP32-C6 (atomic) | clang-riscv |
+| `xtensa-lx6` | ESP32 | clang-xtensa |
+| `xtensa-lx7` | ESP32-S2, ESP32-S3 | clang-xtensa |
 
 ## WASM Compiler Builds
 

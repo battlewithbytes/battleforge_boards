@@ -9,7 +9,7 @@
   "version": "2.0.0",
 
   "sources": {
-    "cmsis": {
+    "esp_idf": {
       "repo": "github:espressif/esp-idf",
       "ref": "release/v5.1",
       "paths": {
