@@ -1,10 +1,15 @@
 {
-  "version": "2.1.0",
-  "lastUpdated": "2025-12-14",
+  "version": "3.0.0",
+  "lastUpdated": "2025-12-15",
   "schemas": {
     "platform": "./schema/platform-v1.schema.json",
     "board": "./schema/board-v1.schema.json",
-    "library": "./schema/library-v1.schema.json"
+    "library": "./schema/library-v1.schema.json",
+    "wasm": "./wasm/schema/wasm-manifest-v1.schema.json"
+  },
+  "wasm": {
+    "manifestPath": "./wasm/manifest.json",
+    "buildScriptsPath": "./scripts/wasm/"
   },
   "platforms": [
     {
