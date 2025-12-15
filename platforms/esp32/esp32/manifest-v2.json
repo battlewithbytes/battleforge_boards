@@ -1,0 +1,103 @@
+{
+  "$schema": "../../../../schema/platform-v2.schema.json",
+  "schemaVersion": "2.0.0",
+  "platform": "esp32",
+  "family": "esp32",
+  "name": "ESP32 Series",
+  "description": "Espressif ESP32 dual-core Xtensa with WiFi and Bluetooth",
+  "architecture": "xtensa-lx6",
+  "version": "2.0.0",
+
+  "sources": {
+    "cmsis": {
+      "repo": "github:espressif/esp-idf",
+      "ref": "release/v5.1",
+      "paths": {
+        "headers": "components/esp_common/include",
+        "startup": "components/esp_system/port",
+        "linker": "components/esp_system/ld",
+        "system": "components/esp_system"
+      },
+      "files": {
+        "headers": [
+          "esp_err.h",
+          "esp_attr.h",
+          "esp_compiler.h"
+        ]
+      }
+    },
+    "soc_headers": {
+      "repo": "github:espressif/esp-idf",
+      "ref": "release/v5.1",
+      "paths": {
+        "headers": "components/soc/esp32/include/soc"
+      },
+      "files": {
+        "headers": [
+          "soc.h",
+          "gpio_reg.h",
+          "uart_reg.h",
+          "timer_group_reg.h"
+        ]
+      }
+    }
+  },
+
+  "devices": [
+    {
+      "id": "esp32",
+      "name": "ESP32",
+      "flash": 4194304,
+      "ram": 520192,
+      "frequency": 240000000,
+      "defines": ["ESP32", "ESP_PLATFORM", "CONFIG_IDF_TARGET_ESP32"],
+      "fpu": "none",
+      "files": {
+        "startup": "cpu_start.c",
+        "linker": "esp32/memory.ld"
+      }
+    },
+    {
+      "id": "esp32-wrover",
+      "name": "ESP32-WROVER",
+      "flash": 4194304,
+      "ram": 520192,
+      "psram": 8388608,
+      "frequency": 240000000,
+      "defines": ["ESP32", "ESP_PLATFORM", "CONFIG_IDF_TARGET_ESP32", "BOARD_HAS_PSRAM"],
+      "fpu": "none",
+      "files": {
+        "startup": "cpu_start.c",
+        "linker": "esp32/memory.ld"
+      }
+    }
+  ],
+
+  "build": {
+    "compilerFlags": [
+      "-mlongcalls",
+      "-fstrict-volatile-bitfields",
+      "-ffunction-sections",
+      "-fdata-sections"
+    ],
+    "linkerFlags": [
+      "--gc-sections"
+    ],
+    "defines": [
+      "ESP_PLATFORM"
+    ],
+    "notes": "ESP32 uses Xtensa architecture which requires xtensa-esp32-elf toolchain. Native browser compilation not currently supported - use Arduino framework or external esp-idf build."
+  },
+
+  "frameworks": {
+    "arduino": {
+      "core": "esp32",
+      "coreUrl": "https://github.com/espressif/arduino-esp32",
+      "packageIndex": "https://espressif.github.io/arduino-esp32/package_esp32_index.json"
+    },
+    "native": {
+      "sdk": "esp-idf",
+      "sdkVersion": "5.1"
+    }
+  }
+}

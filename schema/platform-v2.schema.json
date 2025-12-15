@@ -1,0 +1,287 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://battleforge.battlewithbytes.com/schemas/platform-v2.json",
+  "title": "BattleForge Platform Definition v2",
+  "description": "Schema for defining platform/chip families with external source references",
+  "type": "object",
+  "required": ["schemaVersion", "platform", "family", "name", "architecture", "version", "sources", "devices"],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Reference to the JSON schema"
+    },
+    "schemaVersion": {
+      "type": "string",
+      "const": "2.0.0",
+      "description": "Schema version for this manifest format"
+    },
+    "platform": {
+      "type": "string",
+      "enum": ["stm32", "nrf", "esp32", "rp2040", "samd", "avr", "ch32", "gd32"],
+      "description": "Platform identifier"
+    },
+    "family": {
+      "type": "string",
+      "description": "Chip family (e.g., f1, f4, nrf52, esp32s3, rp2040)"
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-readable name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Brief description of the platform"
+    },
+    "architecture": {
+      "type": "string",
+      "enum": [
+        "cortex-m0", "cortex-m0+", "cortex-m3", "cortex-m4", "cortex-m4f",
+        "cortex-m7", "cortex-m7f", "cortex-m23", "cortex-m33", "cortex-m55",
+        "xtensa-lx6", "xtensa-lx7", "riscv32", "riscv32imc", "riscv32imac"
+      ],
+      "description": "CPU architecture"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Platform definition version (semver)"
+    },
+
+    "sources": {
+      "type": "object",
+      "description": "External source repositories for platform files",
+      "additionalProperties": {
+        "$ref": "#/definitions/sourceDefinition"
+      }
+    },
+
+    "devices": {
+      "type": "array",
+      "description": "Device variants in this family",
+      "items": {
+        "$ref": "#/definitions/deviceDefinition"
+      }
+    },
+
+    "softdevices": {
+      "type": "array",
+      "description": "BLE SoftDevice configurations (Nordic only)",
+      "items": {
+        "$ref": "#/definitions/softdeviceDefinition"
+      }
+    },
+
+    "build": {
+      "$ref": "#/definitions/buildConfig"
+    },
+
+    "frameworks": {
+      "$ref": "#/definitions/frameworksConfig"
+    }
+  },
+
+  "definitions": {
+    "sourceDefinition": {
+      "type": "object",
+      "description": "Defines an external source repository",
+      "required": ["repo"],
+      "properties": {
+        "repo": {
+          "type": "string",
+          "description": "Repository in format 'github:owner/repo' or full URL",
+          "examples": ["github:STMicroelectronics/cmsis_device_f1"]
+        },
+        "ref": {
+          "type": "string",
+          "default": "master",
+          "description": "Git ref (branch, tag, or commit SHA)"
+        },
+        "paths": {
+          "type": "object",
+          "description": "Paths within the repository for different file types",
+          "properties": {
+            "headers": {
+              "type": "string",
+              "description": "Path to header files directory"
+            },
+            "startup": {
+              "type": "string",
+              "description": "Path to startup assembly files"
+            },
+            "linker": {
+              "type": "string",
+              "description": "Path to linker script files"
+            },
+            "system": {
+              "type": "string",
+              "description": "Path to system initialization files"
+            }
+          }
+        },
+        "files": {
+          "type": "object",
+          "description": "Specific files to fetch (if not fetching entire directories)",
+          "properties": {
+            "headers": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "List of header files to fetch"
+            },
+            "system": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "System files to include in project"
+            }
+          }
+        }
+      }
+    },
+
+    "deviceDefinition": {
+      "type": "object",
+      "required": ["id", "name", "flash", "ram", "frequency"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Device identifier (e.g., stm32f103c8)"
+        },
+        "name": {
+          "type": "string",
+          "description": "Human-readable device name"
+        },
+        "flash": {
+          "type": "integer",
+          "description": "Flash size in bytes"
+        },
+        "ram": {
+          "type": "integer",
+          "description": "RAM size in bytes"
+        },
+        "psram": {
+          "type": "integer",
+          "description": "External PSRAM size in bytes (optional)"
+        },
+        "ccram": {
+          "type": "integer",
+          "description": "Core-coupled RAM size in bytes (optional)"
+        },
+        "frequency": {
+          "type": "integer",
+          "description": "CPU frequency in Hz"
+        },
+        "defines": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Device-specific preprocessor defines"
+        },
+        "files": {
+          "type": "object",
+          "description": "Device-specific files from sources",
+          "properties": {
+            "startup": {
+              "type": "string",
+              "description": "Startup file name (from sources.*.paths.startup)"
+            },
+            "linker": {
+              "type": "string",
+              "description": "Linker script name (from sources.*.paths.linker)"
+            },
+            "header": {
+              "type": "string",
+              "description": "Device-specific header file"
+            }
+          }
+        },
+        "fpu": {
+          "type": "string",
+          "enum": ["none", "soft", "softfp", "hard"],
+          "description": "FPU configuration"
+        }
+      }
+    },
+
+    "softdeviceDefinition": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "version": { "type": "string" },
+        "devices": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "flashUsed": { "type": "integer" },
+        "ramUsed": { "type": "integer" },
+        "files": {
+          "type": "object",
+          "properties": {
+            "linker": { "type": "string" },
+            "header": { "type": "string" }
+          }
+        }
+      }
+    },
+
+    "buildConfig": {
+      "type": "object",
+      "properties": {
+        "compilerFlags": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Platform-level compiler flags"
+        },
+        "linkerFlags": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Platform-level linker flags"
+        },
+        "defines": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Platform-level preprocessor defines"
+        },
+        "includePaths": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Additional include paths"
+        }
+      }
+    },
+
+    "frameworksConfig": {
+      "type": "object",
+      "properties": {
+        "arduino": {
+          "type": "object",
+          "properties": {
+            "core": { "type": "string" },
+            "coreUrl": { "type": "string", "format": "uri" },
+            "packageIndex": { "type": "string", "format": "uri" },
+            "variant": { "type": "string" }
+          }
+        },
+        "zephyr": {
+          "type": "object",
+          "properties": {
+            "board": { "type": "string" },
+            "soc": { "type": "string" }
+          }
+        },
+        "espidf": {
+          "type": "object",
+          "properties": {
+            "target": { "type": "string" },
+            "sdkVersion": { "type": "string" }
+          }
+        },
+        "native": {
+          "type": "object",
+          "properties": {
+            "sdk": { "type": "string" },
+            "sdkVersion": { "type": "string" }
+          }
+        }
+      }
+    }
+  }
+}

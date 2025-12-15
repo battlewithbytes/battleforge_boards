@@ -1,0 +1,165 @@
+{
+  "$schema": "../../../../schema/platform-v2.schema.json",
+  "schemaVersion": "2.0.0",
+  "platform": "stm32",
+  "family": "f1",
+  "name": "STM32F1 Series",
+  "description": "STM32F1 Cortex-M3 microcontrollers - popular for learning ARM development",
+  "architecture": "cortex-m3",
+  "version": "2.0.0",
+
+  "sources": {
+    "cmsis": {
+      "repo": "github:STMicroelectronics/cmsis_device_f1",
+      "ref": "master",
+      "paths": {
+        "headers": "Include",
+        "startup": "Source/Templates/gcc",
+        "linker": "Source/Templates/gcc/linker",
+        "system": "Source/Templates"
+      },
+      "files": {
+        "headers": [
+          "stm32f1xx.h",
+          "stm32f100xb.h",
+          "stm32f100xe.h",
+          "stm32f101x6.h",
+          "stm32f101xb.h",
+          "stm32f101xe.h",
+          "stm32f101xg.h",
+          "stm32f102x6.h",
+          "stm32f102xb.h",
+          "stm32f103x6.h",
+          "stm32f103xb.h",
+          "stm32f103xe.h",
+          "stm32f103xg.h",
+          "stm32f105xc.h",
+          "stm32f107xc.h",
+          "system_stm32f1xx.h"
+        ],
+        "system": [
+          "system_stm32f1xx.c"
+        ]
+      }
+    },
+    "cmsis_core": {
+      "repo": "github:STMicroelectronics/cmsis_core",
+      "ref": "master",
+      "paths": {
+        "headers": "Include"
+      },
+      "files": {
+        "headers": [
+          "cmsis_compiler.h",
+          "cmsis_gcc.h",
+          "cmsis_version.h",
+          "core_cm3.h"
+        ]
+      }
+    }
+  },
+
+  "devices": [
+    {
+      "id": "stm32f103c8",
+      "name": "STM32F103C8",
+      "flash": 65536,
+      "ram": 20480,
+      "frequency": 72000000,
+      "defines": ["STM32F103xB", "STM32F1"],
+      "fpu": "none",
+      "files": {
+        "startup": "startup_stm32f103xb.s",
+        "linker": "STM32F103XB_FLASH.ld",
+        "header": "stm32f103xb.h"
+      }
+    },
+    {
+      "id": "stm32f103cb",
+      "name": "STM32F103CB",
+      "flash": 131072,
+      "ram": 20480,
+      "frequency": 72000000,
+      "defines": ["STM32F103xB", "STM32F1"],
+      "fpu": "none",
+      "files": {
+        "startup": "startup_stm32f103xb.s",
+        "linker": "STM32F103XB_FLASH.ld",
+        "header": "stm32f103xb.h"
+      }
+    },
+    {
+      "id": "stm32f103rb",
+      "name": "STM32F103RB",
+      "flash": 131072,
+      "ram": 20480,
+      "frequency": 72000000,
+      "defines": ["STM32F103xB", "STM32F1"],
+      "fpu": "none",
+      "files": {
+        "startup": "startup_stm32f103xb.s",
+        "linker": "STM32F103XB_FLASH.ld",
+        "header": "stm32f103xb.h"
+      }
+    },
+    {
+      "id": "stm32f103c6",
+      "name": "STM32F103C6",
+      "flash": 32768,
+      "ram": 10240,
+      "frequency": 72000000,
+      "defines": ["STM32F103x6", "STM32F1"],
+      "fpu": "none",
+      "files": {
+        "startup": "startup_stm32f103x6.s",
+        "linker": "STM32F103X6_FLASH.ld",
+        "header": "stm32f103x6.h"
+      }
+    },
+    {
+      "id": "stm32f103re",
+      "name": "STM32F103RE",
+      "flash": 524288,
+      "ram": 65536,
+      "frequency": 72000000,
+      "defines": ["STM32F103xE", "STM32F1"],
+      "fpu": "none",
+      "files": {
+        "startup": "startup_stm32f103xe.s",
+        "linker": "STM32F103XE_FLASH.ld",
+        "header": "stm32f103xe.h"
+      }
+    }
+  ],
+
+  "build": {
+    "compilerFlags": [
+      "--target=thumbv7m-none-eabi",
+      "-mcpu=cortex-m3",
+      "-mthumb",
+      "-mfloat-abi=soft",
+      "-nostdlib",
+      "-ffreestanding",
+      "-ffunction-sections",
+      "-fdata-sections"
+    ],
+    "linkerFlags": [
+      "--gc-sections"
+    ],
+    "defines": [
+      "USE_HAL_DRIVER"
+    ]
+  },
+
+  "frameworks": {
+    "arduino": {
+      "core": "stm32duino",
+      "coreUrl": "https://github.com/stm32duino/Arduino_Core_STM32",
+      "packageIndex": "https://github.com/stm32duino/BoardManagerFiles/raw/main/package_stmicroelectronics_index.json"
+    },
+    "native": {
+      "sdk": "stm32cube",
+      "sdkVersion": "1.8.5"
+    }
+  }
+}
