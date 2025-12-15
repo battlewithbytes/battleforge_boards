@@ -1,98 +1,33 @@
 {
-  "version": "2.0.0",
-  "lastUpdated": "2025-01-15",
+  "version": "2.1.0",
+  "lastUpdated": "2025-12-14",
   "schemas": {
     "platform": "./schema/platform-v1.schema.json",
     "board": "./schema/board-v1.schema.json",
     "library": "./schema/library-v1.schema.json"
   },
-
   "platforms": [
     {
-      "id": "stm32-f1",
-      "platform": "stm32",
-      "family": "f1",
-      "name": "STM32F1 Series",
-      "architecture": "cortex-m3",
-      "path": "platforms/stm32/f1/manifest.json"
+      "id": "stm32",
+      "configPath": "platforms/stm32/platform.json",
+      "boardsPath": "stm32/index.json"
     },
     {
-      "id": "nrf-nrf52",
-      "platform": "nrf",
-      "family": "nrf52",
-      "name": "Nordic nRF52 Series",
-      "architecture": "cortex-m4f",
-      "path": "platforms/nrf/nrf52/manifest.json"
+      "id": "esp32",
+      "configPath": "platforms/esp32/platform.json",
+      "boardsPath": "esp32/index.json"
     },
     {
-      "id": "esp32-esp32",
-      "platform": "esp32",
-      "family": "esp32",
-      "name": "ESP32 Series",
-      "architecture": "xtensa-lx6",
-      "path": "platforms/esp32/esp32/manifest.json"
+      "id": "nrf",
+      "configPath": "platforms/nrf/platform.json",
+      "boardsPath": "nrf/index.json"
     },
     {
-      "id": "rp2040-rp2",
-      "platform": "rp2040",
-      "family": "rp2",
-      "name": "RP2040 Series",
-      "architecture": "cortex-m0+",
-      "path": "platforms/rp2040/rp2/manifest.json"
+      "id": "rp2040",
+      "configPath": "platforms/rp2040/platform.json",
+      "boardsPath": "rp2040/index.json"
     }
   ],
-
-  "boards": [
-    {
-      "id": "feather_nrf52840_express",
-      "name": "Adafruit Feather nRF52840 Express",
-      "vendor": "adafruit",
-      "platform": "nrf",
-      "family": "nrf52",
-      "path": "boards/nrf/adafruit/feather_nrf52840_express.json"
-    },
-    {
-      "id": "nrf52840_dk",
-      "name": "Nordic nRF52840 DK",
-      "vendor": "nordic",
-      "platform": "nrf",
-      "family": "nrf52",
-      "path": "boards/nrf/nordic/nrf52840_dk.json"
-    },
-    {
-      "id": "sparkfun_thing_plus_nrf52840",
-      "name": "SparkFun Thing Plus - nRF52840",
-      "vendor": "sparkfun",
-      "platform": "nrf",
-      "family": "nrf52",
-      "path": "boards/nrf/sparkfun/thing_plus_nrf52840.json"
-    },
-    {
-      "id": "esp32_devkitc",
-      "name": "ESP32-DevKitC",
-      "vendor": "espressif",
-      "platform": "esp32",
-      "family": "esp32",
-      "path": "boards/esp32/espressif/esp32_devkitc.json"
-    },
-    {
-      "id": "raspberry_pi_pico",
-      "name": "Raspberry Pi Pico",
-      "vendor": "raspberry_pi",
-      "platform": "rp2040",
-      "family": "rp2",
-      "path": "boards/rp2040/raspberry_pi/pico.json"
-    },
-    {
-      "id": "bluepill_stm32f103c8",
-      "name": "STM32 Blue Pill (F103C8)",
-      "vendor": "generic",
-      "platform": "stm32",
-      "family": "f1",
-      "path": "boards/stm32/generic/bluepill_stm32f103c8.json"
-    }
-  ],
-
   "libraries": [
     {
       "id": "freertos",

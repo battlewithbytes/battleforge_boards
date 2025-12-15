@@ -8,8 +8,13 @@
   "version": "1.0.0",
 
   "headers": {
-    "url": "/platforms/stm32/f1/headers.tar.gz",
-    "hash": null,
+    "source": "github:modm-io/cmsis-header-stm32/stm32f1xx/Include",
+    "ref": "master",
+    "files": [
+      "stm32f1xx.h",
+      "stm32f103xb.h",
+      "system_stm32f1xx.h"
+    ],
     "includes": [
       "cmsis",
       "device"
