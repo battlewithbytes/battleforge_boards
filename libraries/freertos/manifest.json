@@ -14,6 +14,8 @@
   "platforms": ["stm32", "nrf", "esp32", "rp2040"],
   "architectures": ["cortex-m0", "cortex-m0+", "cortex-m3", "cortex-m4", "cortex-m4f", "cortex-m7"],
 
+  "frameworks": ["native"],
+
   "includes": ["include"],
   "sources": [
     "*.c",

@@ -39,28 +39,48 @@
       "name": "FreeRTOS",
       "version": "10.5.1",
       "category": "rtos",
-      "path": "libraries/freertos/manifest.json"
+      "path": "libraries/freertos/manifest.json",
+      "description": "Real-time operating system kernel for embedded devices",
+      "author": "Amazon Web Services",
+      "license": "MIT",
+      "platforms": ["stm32", "nrf", "esp32", "rp2040"],
+      "frameworks": ["native"]
     },
     {
       "id": "wire",
       "name": "Wire",
       "version": "1.0.0",
       "category": "communication",
-      "path": "libraries/wire/manifest.json"
+      "path": "libraries/wire/manifest.json",
+      "description": "I2C/TWI library for Arduino",
+      "author": "Arduino",
+      "license": "LGPL-2.1",
+      "platforms": ["stm32", "nrf", "esp32", "rp2040", "avr", "samd"],
+      "frameworks": ["arduino"]
     },
     {
       "id": "spi",
       "name": "SPI",
       "version": "1.0.0",
       "category": "communication",
-      "path": "libraries/spi/manifest.json"
+      "path": "libraries/spi/manifest.json",
+      "description": "SPI library for Arduino",
+      "author": "Arduino",
+      "license": "LGPL-2.1",
+      "platforms": ["stm32", "nrf", "esp32", "rp2040", "avr", "samd"],
+      "frameworks": ["arduino"]
     },
     {
       "id": "adafruit_neopixel",
       "name": "Adafruit NeoPixel",
       "version": "1.12.0",
       "category": "display",
-      "path": "libraries/adafruit_neopixel/manifest.json"
+      "path": "libraries/adafruit_neopixel/manifest.json",
+      "description": "Arduino library for controlling WS2812 NeoPixel LEDs",
+      "author": "Adafruit",
+      "license": "LGPL-3.0",
+      "platforms": ["stm32", "nrf", "esp32", "rp2040", "avr", "samd"],
+      "frameworks": ["arduino"]
     }
   ]
 }
