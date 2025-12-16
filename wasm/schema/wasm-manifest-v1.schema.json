@@ -2,9 +2,13 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://battleforge.battlewithbytes.com/schemas/wasm-manifest-v1.json",
   "title": "BattleForge WASM Manifest",
-  "description": "Schema for WASM compiler/linker/disassembler versioning and metadata",
+  "description": "Schema for WASM compiler/linker/disassembler/emulator versioning and metadata",
   "type": "object",
-  "required": ["schemaVersion", "lastUpdated", "compilers"],
+  "required": [
+    "schemaVersion",
+    "lastUpdated",
+    "compilers"
+  ],
   "properties": {
     "schemaVersion": {
       "type": "string",
@@ -18,23 +22,33 @@
     },
     "releaseChannel": {
       "type": "string",
-      "enum": ["stable", "beta", "nightly"],
+      "enum": [
+        "stable",
+        "beta",
+        "nightly"
+      ],
       "default": "stable",
       "description": "Release channel for this manifest"
     },
     "compilers": {
       "type": "array",
-      "items": { "$ref": "#/definitions/compiler" },
+      "items": {
+        "$ref": "#/definitions/compiler"
+      },
       "description": "List of available compilers"
     },
     "linkers": {
       "type": "array",
-      "items": { "$ref": "#/definitions/linker" },
+      "items": {
+        "$ref": "#/definitions/linker"
+      },
       "description": "List of available linkers"
     },
     "disassemblers": {
       "type": "array",
-      "items": { "$ref": "#/definitions/disassembler" },
+      "items": {
+        "$ref": "#/definitions/disassembler"
+      },
       "description": "List of available disassemblers"
     },
     "meta": {
@@ -51,16 +65,30 @@
         },
         "checksumAlgorithm": {
           "type": "string",
-          "enum": ["sha256", "sha384", "sha512"],
+          "enum": [
+            "sha256",
+            "sha384",
+            "sha512"
+          ],
           "default": "sha256"
         }
       }
+    },
+    "emulators": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/emulator"
+      },
+      "description": "List of available emulators"
     }
   },
   "definitions": {
     "versionInfo": {
       "type": "object",
-      "required": ["softwareVersion", "releaseVersion"],
+      "required": [
+        "softwareVersion",
+        "releaseVersion"
+      ],
       "properties": {
         "softwareVersion": {
           "type": "string",
@@ -79,7 +107,10 @@
     },
     "fileInfo": {
       "type": "object",
-      "required": ["wasm", "js"],
+      "required": [
+        "wasm",
+        "js"
+      ],
       "properties": {
         "wasm": {
           "type": "string",
@@ -93,7 +124,9 @@
     },
     "hashInfo": {
       "type": "object",
-      "required": ["compressed"],
+      "required": [
+        "compressed"
+      ],
       "properties": {
         "compressed": {
           "type": "string",
@@ -131,8 +164,20 @@
     },
     "compiler": {
       "type": "object",
-      "required": ["id", "name", "softwareVersion", "releaseVersion", "files", "hashes", "architectures"],
-      "allOf": [{ "$ref": "#/definitions/versionInfo" }],
+      "required": [
+        "id",
+        "name",
+        "softwareVersion",
+        "releaseVersion",
+        "files",
+        "hashes",
+        "architectures"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/versionInfo"
+        }
+      ],
       "properties": {
         "id": {
           "type": "string",
@@ -149,7 +194,12 @@
         },
         "status": {
           "type": "string",
-          "enum": ["stable", "beta", "deprecated", "coming_soon"],
+          "enum": [
+            "stable",
+            "beta",
+            "deprecated",
+            "coming_soon"
+          ],
           "default": "stable"
         },
         "releaseNotes": {
@@ -161,7 +211,9 @@
           "format": "date",
           "description": "Release date (YYYY-MM-DD)"
         },
-        "files": { "$ref": "#/definitions/fileInfo" },
+        "files": {
+          "$ref": "#/definitions/fileInfo"
+        },
         "size": {
           "type": "integer",
           "minimum": 0,
@@ -172,20 +224,29 @@
           "minimum": 0,
           "description": "Uncompressed file size in bytes"
         },
-        "hashes": { "$ref": "#/definitions/hashInfo" },
+        "hashes": {
+          "$ref": "#/definitions/hashInfo"
+        },
         "architectures": {
           "type": "array",
-          "items": { "type": "string" },
+          "items": {
+            "type": "string"
+          },
           "minItems": 1,
           "description": "Supported target architectures"
         },
-        "buildInfo": { "$ref": "#/definitions/buildInfo" },
+        "buildInfo": {
+          "$ref": "#/definitions/buildInfo"
+        },
         "minAppVersion": {
           "type": "string",
           "description": "Minimum BattleForge app version required"
         },
         "deprecationDate": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "format": "date",
           "description": "Date when this version will be deprecated"
         }
@@ -193,48 +254,177 @@
     },
     "linker": {
       "type": "object",
-      "required": ["id", "name", "softwareVersion", "releaseVersion", "files", "hashes"],
-      "allOf": [{ "$ref": "#/definitions/versionInfo" }],
+      "required": [
+        "id",
+        "name",
+        "softwareVersion",
+        "releaseVersion",
+        "files",
+        "hashes"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/versionInfo"
+        }
+      ],
       "properties": {
-        "id": { "type": "string" },
-        "name": { "type": "string" },
-        "description": { "type": "string" },
-        "files": { "$ref": "#/definitions/fileInfo" },
-        "size": { "type": "integer" },
-        "hashes": { "$ref": "#/definitions/hashInfo" },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "files": {
+          "$ref": "#/definitions/fileInfo"
+        },
+        "size": {
+          "type": "integer"
+        },
+        "hashes": {
+          "$ref": "#/definitions/hashInfo"
+        },
         "architectures": {
           "type": "array",
-          "items": { "type": "string" }
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
     "disassembler": {
       "type": "object",
-      "required": ["id", "name", "softwareVersion", "releaseVersion", "files", "hashes"],
-      "allOf": [{ "$ref": "#/definitions/versionInfo" }],
+      "required": [
+        "id",
+        "name",
+        "softwareVersion",
+        "releaseVersion",
+        "files",
+        "hashes"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/versionInfo"
+        }
+      ],
       "properties": {
-        "id": { "type": "string" },
-        "name": { "type": "string" },
-        "description": { "type": "string" },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
         "files": {
           "type": "object",
           "properties": {
-            "wasm": { "type": "string" },
-            "wasmGz": { "type": "string" },
-            "js": { "type": "string" },
-            "api": { "type": "string" }
+            "wasm": {
+              "type": "string"
+            },
+            "wasmGz": {
+              "type": "string"
+            },
+            "js": {
+              "type": "string"
+            },
+            "api": {
+              "type": "string"
+            }
           }
         },
-        "size": { "type": "integer" },
-        "sizeCompressed": { "type": "integer" },
-        "hashes": { "$ref": "#/definitions/hashInfo" },
+        "size": {
+          "type": "integer"
+        },
+        "sizeCompressed": {
+          "type": "integer"
+        },
+        "hashes": {
+          "$ref": "#/definitions/hashInfo"
+        },
         "architectures": {
           "type": "array",
-          "items": { "type": "string" }
+          "items": {
+            "type": "string"
+          }
         },
         "features": {
           "type": "array",
-          "items": { "type": "string" }
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "emulator": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "softwareVersion",
+        "releaseVersion",
+        "files",
+        "hashes",
+        "supportedCpus"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/versionInfo"
+        }
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "files": {
+          "type": "object",
+          "properties": {
+            "wasm": {
+              "type": "string"
+            },
+            "wasmGz": {
+              "type": "string"
+            },
+            "js": {
+              "type": "string"
+            },
+            "api": {
+              "type": "string"
+            }
+          }
+        },
+        "size": {
+          "type": "integer"
+        },
+        "sizeCompressed": {
+          "type": "integer"
+        },
+        "hashes": {
+          "$ref": "#/definitions/hashInfo"
+        },
+        "supportedCpus": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "description": "List of supported CPU types (e.g., cortex-m0, cortex-m3)"
+        },
+        "hooks": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Available hook types (e.g., code, memory, interrupt)"
         }
       }
     }
