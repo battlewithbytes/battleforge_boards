@@ -8,6 +8,20 @@
   "architecture": "cortex-m4f",
   "version": "2.0.0",
 
+  "memory": {
+    "regions": {
+      "FLASH": { "origin": "0x00000000", "attr": "rx", "description": "Internal Flash (starts at 0x0 on nRF)" },
+      "RAM": { "origin": "0x20000000", "attr": "rwx", "description": "Internal SRAM" }
+    },
+    "stack": { "endSymbol": "_estack", "minSize": 2048 },
+    "heap": { "minSize": 1024 }
+  },
+
+  "linker": {
+    "entry": "Reset_Handler",
+    "template": "arm-cortex-m4f"
+  },
+
   "sources": {
     "cmsis": {
       "repo": "github:NordicSemiconductor/nrfx",
@@ -23,6 +37,8 @@
           "nrf52.h",
           "nrf52832.h",
           "nrf52832_peripherals.h",
+          "nrf52833.h",
+          "nrf52833_peripherals.h",
           "nrf52840.h",
           "nrf52840_peripherals.h",
           "nrf52_bitfields.h",
@@ -61,11 +77,26 @@
       "ram": 65536,
       "frequency": 64000000,
       "defines": ["NRF52832_XXAA", "NRF52_SERIES", "NRF52"],
-      "fpu": "fpv4-sp-d16",
+      "fpu": "hard",
       "files": {
         "startup": "gcc_startup_nrf52.S",
         "linker": "nrf52832_xxaa.ld",
         "header": "nrf52832.h",
+        "system": "system_nrf52.c"
+      }
+    },
+    {
+      "id": "nrf52833",
+      "name": "nRF52833",
+      "flash": 524288,
+      "ram": 131072,
+      "frequency": 64000000,
+      "defines": ["NRF52833_XXAA", "NRF52_SERIES", "NRF52833"],
+      "fpu": "hard",
+      "files": {
+        "startup": "gcc_startup_nrf52833.S",
+        "linker": "nrf52833_xxaa.ld",
+        "header": "nrf52833.h",
         "system": "system_nrf52.c"
       }
     },
@@ -76,7 +107,7 @@
       "ram": 262144,
       "frequency": 64000000,
       "defines": ["NRF52840_XXAA", "NRF52_SERIES", "NRF52840"],
-      "fpu": "fpv4-sp-d16",
+      "fpu": "hard",
       "files": {
         "startup": "gcc_startup_nrf52840.S",
         "linker": "nrf52840_xxaa.ld",
@@ -99,8 +130,8 @@
     {
       "id": "s140",
       "name": "S140 SoftDevice",
-      "version": "6.1.1",
-      "devices": ["nrf52840"],
+      "version": "7.3.0",
+      "devices": ["nrf52833", "nrf52840"],
       "flashUsed": 155648,
       "ramUsed": 5632,
       "linkerScript": "nrf52840_s140.ld"

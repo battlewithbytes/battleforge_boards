@@ -8,6 +8,21 @@
   "architecture": "xtensa-lx6",
   "version": "2.0.0",
 
+  "memory": {
+    "regions": {
+      "FLASH": { "origin": "0x3F400000", "attr": "rx", "description": "External Flash (via cache)" },
+      "RAM": { "origin": "0x3FFB0000", "attr": "rwx", "description": "Internal DRAM" },
+      "IRAM": { "origin": "0x40080000", "attr": "rx", "description": "Internal Instruction RAM" }
+    },
+    "stack": { "minSize": 8192 },
+    "heap": { "minSize": 16384 }
+  },
+
+  "linker": {
+    "entry": "call_start_cpu0",
+    "template": "xtensa-esp32"
+  },
+
   "sources": {
     "esp_idf": {
       "repo": "github:espressif/esp-idf",

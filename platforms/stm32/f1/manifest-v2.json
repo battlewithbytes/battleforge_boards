@@ -8,6 +8,20 @@
   "architecture": "cortex-m3",
   "version": "2.0.0",
 
+  "memory": {
+    "regions": {
+      "FLASH": { "origin": "0x08000000", "attr": "rx", "description": "Internal Flash" },
+      "RAM": { "origin": "0x20000000", "attr": "rwx", "description": "Internal SRAM" }
+    },
+    "stack": { "endSymbol": "_estack", "minSize": 1024 },
+    "heap": { "minSize": 512 }
+  },
+
+  "linker": {
+    "entry": "Reset_Handler",
+    "template": "arm-cortex-m"
+  },
+
   "sources": {
     "cmsis": {
       "repo": "github:STMicroelectronics/cmsis_device_f1",

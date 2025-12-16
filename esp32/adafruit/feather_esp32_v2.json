@@ -14,12 +14,9 @@
   "documentation": {
     "datasheet": "https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf",
     "schematic": "https://learn.adafruit.com/assets/111211",
-    "productPage": "https://www.adafruit.com/product/5400",
+    "product": "https://www.adafruit.com/product/5400",
     "pinout": "https://learn.adafruit.com/adafruit-esp32-feather-v2/pinouts",
-    "guides": [
-      "https://learn.adafruit.com/adafruit-esp32-feather-v2",
-      "https://learn.adafruit.com/adafruit-esp32-feather-v2/arduino-ide-setup"
-    ]
+    "guide": "https://learn.adafruit.com/adafruit-esp32-feather-v2"
   },
 
   "namedPins": {

@@ -81,7 +81,7 @@
   "documentation": {
     "pinout": "https://deepbluembedded.com/wp-content/uploads/2020/06/Bluepillpinout.gif",
     "datasheet": "https://www.st.com/resource/en/datasheet/stm32f103c8.pdf",
-    "productPage": "https://stm32-base.org/boards/STM32F103C8T6-Blue-Pill.html"
+    "product": "https://stm32-base.org/boards/STM32F103C8T6-Blue-Pill.html"
   },
 
   "features": ["usb", "rtc", "can", "i2c", "spi", "uart"],
