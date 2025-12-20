@@ -1,0 +1,55 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "architecture-v1.schema.json",
+  "title": "Architecture Configuration Schema",
+  "description": "Defines compiler configurations for each supported CPU architecture",
+  "type": "object",
+  "required": ["$schema", "version", "architectures"],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "JSON Schema reference"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Schema version"
+    },
+    "architectures": {
+      "type": "object",
+      "description": "Map of architecture ID to configuration",
+      "additionalProperties": {
+        "$ref": "#/definitions/ArchitectureConfig"
+      }
+    }
+  },
+  "definitions": {
+    "ArchitectureConfig": {
+      "type": "object",
+      "required": ["target", "cpu", "libPath"],
+      "properties": {
+        "target": {
+          "type": "string",
+          "description": "Clang target triple (e.g., thumbv7m-none-eabi)"
+        },
+        "cpu": {
+          "type": "string",
+          "description": "CPU name for -mcpu flag (e.g., cortex-m3)"
+        },
+        "fpu": {
+          "type": "string",
+          "description": "FPU type for -mfpu flag (e.g., fpv4-sp-d16)"
+        },
+        "float": {
+          "type": "string",
+          "enum": ["soft", "softfp", "hard"],
+          "description": "Float ABI for -mfloat-abi flag"
+        },
+        "libPath": {
+          "type": "string",
+          "description": "Path under /libs/ for prebuilt libraries"
+        }
+      }
+    }
+  }
+}

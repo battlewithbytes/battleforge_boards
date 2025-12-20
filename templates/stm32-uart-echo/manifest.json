@@ -1,0 +1,23 @@
+{
+  "$schema": "../../schema/template-v1.schema.json",
+  "id": "stm32-uart-echo",
+  "name": "STM32 UART Echo",
+  "description": "Echo characters received on USART1 (PA9/PA10)",
+  "icon": "📡",
+  "framework": "native",
+  "platformPreset": {
+    "platformId": "stm32",
+    "familyId": "f1",
+    "deviceId": "stm32f103c8",
+    "frameworkId": "native"
+  },
+  "files": [
+    {
+      "path": "/src/main.c",
+      "sourcePath": "src/main.c",
+      "editable": true
+    }
+  ],
+  "categories": ["communication", "uart"],
+  "keywords": ["uart", "usart", "serial", "echo", "stm32"]
+}

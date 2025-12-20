@@ -1,0 +1,17 @@
+{
+  "$schema": "../../schema/template-v1.schema.json",
+  "id": "blank",
+  "name": "Blank Project",
+  "description": "Empty project with minimal startup code",
+  "icon": "📄",
+  "platformPreset": null,
+  "files": [
+    {
+      "path": "/src/main.c",
+      "sourcePath": "src/main.c",
+      "editable": true
+    }
+  ],
+  "categories": ["basics"],
+  "keywords": ["blank", "empty", "starter", "template"]
+}

@@ -1,0 +1,23 @@
+{
+  "$schema": "../../schema/template-v1.schema.json",
+  "id": "stm32-serial-hello",
+  "name": "STM32 Serial Hello World",
+  "description": "Print 'Hello World' on USART1 (PA9/PA10) at 115200 baud",
+  "icon": "👋",
+  "framework": "native",
+  "platformPreset": {
+    "platformId": "stm32",
+    "familyId": "f1",
+    "deviceId": "stm32f103c8",
+    "frameworkId": "native"
+  },
+  "files": [
+    {
+      "path": "/src/main.c",
+      "sourcePath": "src/main.c",
+      "editable": true
+    }
+  ],
+  "categories": ["basics", "uart", "serial"],
+  "keywords": ["hello", "world", "uart", "serial", "usart", "stm32", "bluepill"]
+}

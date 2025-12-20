@@ -1,0 +1,27 @@
+{
+  "$schema": "../../schema/template-v1.schema.json",
+  "id": "arduino-blink",
+  "name": "Arduino Blink",
+  "description": "Classic Arduino LED blink using digitalWrite()",
+  "icon": "🔵",
+  "framework": "arduino",
+  "platformPreset": null,
+  "architectureRequirements": [
+    "cortex-m0",
+    "cortex-m0+",
+    "cortex-m3",
+    "cortex-m4",
+    "cortex-m4f",
+    "cortex-m7",
+    "cortex-m7f"
+  ],
+  "files": [
+    {
+      "path": "/src/Blink.ino",
+      "sourcePath": "src/Blink.ino",
+      "editable": true
+    }
+  ],
+  "categories": ["basics", "gpio"],
+  "keywords": ["arduino", "blink", "led", "digitalwrite"]
+}

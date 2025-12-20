@@ -1,12 +1,64 @@
 {
-  "version": "3.0.0",
-  "lastUpdated": "2025-12-15",
+  "version": "3.1.0",
+  "lastUpdated": "2025-12-20",
   "schemas": {
     "platform": "./schema/platform-v1.schema.json",
     "board": "./schema/board-v1.schema.json",
     "library": "./schema/library-v1.schema.json",
+    "template": "./schema/template-v1.schema.json",
     "wasm": "./wasm/schema/wasm-manifest-v1.schema.json"
   },
+  "templates": [
+    {
+      "id": "stm32-blink",
+      "name": "STM32 LED Blink",
+      "path": "templates/stm32-blink/manifest.json",
+      "framework": "native",
+      "platforms": ["stm32"]
+    },
+    {
+      "id": "stm32-uart-echo",
+      "name": "STM32 UART Echo",
+      "path": "templates/stm32-uart-echo/manifest.json",
+      "framework": "native",
+      "platforms": ["stm32"]
+    },
+    {
+      "id": "stm32-serial-hello",
+      "name": "STM32 Serial Hello World",
+      "path": "templates/stm32-serial-hello/manifest.json",
+      "framework": "native",
+      "platforms": ["stm32"]
+    },
+    {
+      "id": "stm32-freertos",
+      "name": "STM32 FreeRTOS",
+      "path": "templates/stm32-freertos/manifest.json",
+      "framework": "native",
+      "platforms": ["stm32"]
+    },
+    {
+      "id": "arduino-blink",
+      "name": "Arduino Blink",
+      "path": "templates/arduino-blink/manifest.json",
+      "framework": "arduino",
+      "platforms": ["stm32", "nrf", "rp2040"]
+    },
+    {
+      "id": "arduino-serial",
+      "name": "Arduino Serial",
+      "path": "templates/arduino-serial/manifest.json",
+      "framework": "arduino",
+      "platforms": ["stm32", "nrf", "rp2040"]
+    },
+    {
+      "id": "blank",
+      "name": "Blank Project",
+      "path": "templates/blank/manifest.json",
+      "framework": null,
+      "platforms": null
+    }
+  ],
   "wasm": {
     "manifestPath": "./wasm/manifest.json",
     "buildScriptsPath": "./scripts/wasm/"

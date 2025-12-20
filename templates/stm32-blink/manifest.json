@@ -1,0 +1,33 @@
+{
+  "$schema": "../../schema/template-v1.schema.json",
+  "id": "stm32-blink",
+  "name": "STM32 LED Blink",
+  "description": "Blink the onboard LED on STM32F103C8T6 (Blue Pill)",
+  "icon": "💡",
+  "framework": "native",
+  "platformPreset": {
+    "platformId": "stm32",
+    "familyId": "f1",
+    "deviceId": "stm32f103c8",
+    "frameworkId": "native"
+  },
+  "files": [
+    {
+      "path": "/src/main.c",
+      "sourcePath": "src/main.c",
+      "editable": true
+    },
+    {
+      "path": "/libs/utils.h",
+      "sourcePath": "libs/utils.h",
+      "editable": true
+    },
+    {
+      "path": "/libs/utils.c",
+      "sourcePath": "libs/utils.c",
+      "editable": true
+    }
+  ],
+  "categories": ["basics", "gpio"],
+  "keywords": ["blink", "led", "gpio", "stm32", "bluepill"]
+}

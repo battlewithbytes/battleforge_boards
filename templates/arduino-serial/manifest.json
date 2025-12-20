@@ -1,0 +1,27 @@
+{
+  "$schema": "../../schema/template-v1.schema.json",
+  "id": "arduino-serial",
+  "name": "Arduino Serial",
+  "description": "Serial communication using Arduino Serial API",
+  "icon": "🔵",
+  "framework": "arduino",
+  "platformPreset": null,
+  "architectureRequirements": [
+    "cortex-m0",
+    "cortex-m0+",
+    "cortex-m3",
+    "cortex-m4",
+    "cortex-m4f",
+    "cortex-m7",
+    "cortex-m7f"
+  ],
+  "files": [
+    {
+      "path": "/src/Serial.ino",
+      "sourcePath": "src/Serial.ino",
+      "editable": true
+    }
+  ],
+  "categories": ["basics", "communication"],
+  "keywords": ["arduino", "serial", "uart", "communication"]
+}

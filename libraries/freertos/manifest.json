@@ -6,29 +6,68 @@
   "description": "Real-time operating system kernel for embedded devices",
   "author": "Amazon Web Services",
   "license": "MIT",
-  "repository": "https://github.com/FreeRTOS/FreeRTOS-Kernel",
-
-  "url": "/libs/freertos-10.5.1.tar.gz",
-  "hash": null,
+  "homepage": "https://www.freertos.org",
 
   "platforms": ["stm32", "nrf", "esp32", "rp2040"],
   "architectures": ["cortex-m0", "cortex-m0+", "cortex-m3", "cortex-m4", "cortex-m4f", "cortex-m7"],
 
   "frameworks": ["native"],
 
-  "includes": ["include"],
-  "sources": [
-    "*.c",
-    "portable/GCC/ARM_CM0/*.c",
-    "portable/GCC/ARM_CM3/*.c",
-    "portable/GCC/ARM_CM4F/*.c",
-    "portable/MemMang/heap_4.c"
-  ],
+  "source": {
+    "type": "github",
+    "owner": "FreeRTOS",
+    "repo": "FreeRTOS-Kernel",
+    "ref": "V10.5.1",
+    "files": [
+      { "path": "include/FreeRTOS.h", "dest": "include/" },
+      { "path": "include/task.h", "dest": "include/" },
+      { "path": "include/queue.h", "dest": "include/" },
+      { "path": "include/semphr.h", "dest": "include/" },
+      { "path": "include/timers.h", "dest": "include/" },
+      { "path": "include/event_groups.h", "dest": "include/" },
+      { "path": "include/stream_buffer.h", "dest": "include/" },
+      { "path": "include/message_buffer.h", "dest": "include/" },
+      { "path": "include/list.h", "dest": "include/" },
+      { "path": "include/portable.h", "dest": "include/" },
+      { "path": "include/projdefs.h", "dest": "include/" },
+      { "path": "include/mpu_wrappers.h", "dest": "include/" },
+      { "path": "include/deprecated_definitions.h", "dest": "include/" },
+      { "path": "include/stack_macros.h", "dest": "include/" },
+      { "path": "tasks.c", "dest": "src/" },
+      { "path": "queue.c", "dest": "src/" },
+      { "path": "list.c", "dest": "src/" },
+      { "path": "timers.c", "dest": "src/" },
+      { "path": "event_groups.c", "dest": "src/" },
+      { "path": "stream_buffer.c", "dest": "src/" },
+      { "path": "portable/MemMang/heap_4.c", "dest": "src/portable/" },
+      { "path": "portable/GCC/ARM_CM0/port.c", "dest": "src/portable/ARM_CM0/", "arch": "cortex-m0" },
+      { "path": "portable/GCC/ARM_CM0/portmacro.h", "dest": "include/portable/ARM_CM0/", "arch": "cortex-m0" },
+      { "path": "portable/GCC/ARM_CM3/port.c", "dest": "src/portable/ARM_CM3/", "arch": "cortex-m3" },
+      { "path": "portable/GCC/ARM_CM3/portmacro.h", "dest": "include/portable/ARM_CM3/", "arch": "cortex-m3" },
+      { "path": "portable/GCC/ARM_CM4F/port.c", "dest": "src/portable/ARM_CM4F/", "arch": "cortex-m4" },
+      { "path": "portable/GCC/ARM_CM4F/portmacro.h", "dest": "include/portable/ARM_CM4F/", "arch": "cortex-m4" },
+      { "path": "portable/GCC/ARM_CM4F/port.c", "dest": "src/portable/ARM_CM4F/", "arch": "cortex-m4f" },
+      { "path": "portable/GCC/ARM_CM4F/portmacro.h", "dest": "include/portable/ARM_CM4F/", "arch": "cortex-m4f" },
+      { "path": "portable/GCC/ARM_CM7/r0p1/port.c", "dest": "src/portable/ARM_CM7/", "arch": "cortex-m7" },
+      { "path": "portable/GCC/ARM_CM7/r0p1/portmacro.h", "dest": "include/portable/ARM_CM7/", "arch": "cortex-m7" }
+    ]
+  },
 
-  "dependencies": [],
+  "build": {
+    "includePaths": [
+      "include",
+      "include/portable/${arch}"
+    ],
+    "defines": [],
+    "sources": [
+      "src/*.c",
+      "src/portable/${arch}/*.c"
+    ]
+  },
+
+  "dependencies": {},
 
   "configTemplate": "FreeRTOSConfig.h",
 
-  "categories": ["rtos", "scheduler", "multitasking"],
-  "keywords": ["rtos", "freertos", "scheduler", "tasks", "queues", "semaphores"]
+  "tags": ["rtos", "scheduler", "multitasking", "tasks", "queues", "semaphores"]
 }

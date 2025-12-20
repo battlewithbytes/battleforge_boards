@@ -1,0 +1,23 @@
+{
+  "$schema": "../../schema/template-v1.schema.json",
+  "id": "stm32-freertos",
+  "name": "STM32 FreeRTOS",
+  "description": "FreeRTOS with two LED blink tasks on STM32F103C8T6",
+  "icon": "⚡",
+  "framework": "native",
+  "platformPreset": {
+    "platformId": "stm32",
+    "familyId": "f1",
+    "deviceId": "stm32f103c8",
+    "frameworkId": "native"
+  },
+  "files": [
+    {
+      "path": "/src/main.c",
+      "sourcePath": "src/main.c",
+      "editable": true
+    }
+  ],
+  "categories": ["rtos", "advanced"],
+  "keywords": ["freertos", "rtos", "tasks", "multitasking", "stm32"]
+}

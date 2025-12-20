@@ -1,0 +1,81 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "template-v1.schema.json",
+  "title": "BattleForge Project Template",
+  "type": "object",
+  "required": ["id", "name", "description", "files"],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string",
+      "description": "Unique template identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Short description of the template"
+    },
+    "icon": {
+      "type": "string",
+      "description": "Emoji or icon identifier"
+    },
+    "framework": {
+      "type": "string",
+      "enum": ["native", "arduino", "mbed", "zephyr", "espidf"],
+      "description": "Required framework"
+    },
+    "platformPreset": {
+      "type": ["object", "null"],
+      "description": "Pre-selected platform configuration",
+      "properties": {
+        "platformId": { "type": "string" },
+        "familyId": { "type": "string" },
+        "deviceId": { "type": "string" },
+        "frameworkId": { "type": "string" }
+      },
+      "required": ["platformId", "familyId", "deviceId"]
+    },
+    "architectureRequirements": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Compatible CPU architectures"
+    },
+    "files": {
+      "type": "array",
+      "description": "List of template files",
+      "items": {
+        "type": "object",
+        "required": ["path", "editable"],
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "File path in project (e.g., /src/main.c)"
+          },
+          "sourcePath": {
+            "type": "string",
+            "description": "Path to source file relative to template directory"
+          },
+          "editable": {
+            "type": "boolean",
+            "description": "Whether the file can be edited by user"
+          }
+        }
+      }
+    },
+    "categories": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Template categories for filtering"
+    },
+    "keywords": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Search keywords"
+    }
+  }
+}
