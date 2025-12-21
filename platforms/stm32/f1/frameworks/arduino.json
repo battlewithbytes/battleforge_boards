@@ -1,0 +1,53 @@
+{
+  "id": "arduino",
+  "name": "Arduino Framework",
+  "description": "Arduino-style programming for STM32F1 series using STM32duino core",
+  "version": "2.8.1",
+
+  "coreUrl": "/wasm/arduino/arduino-stm32f1-2.8.1.tar.gz",
+  "coreChecksum": "c3285ce753c927db88ab34102e5d797f6056df6d4c84e7b9a12844b3079369a3",
+
+  "compilerFlags": [
+    "--target=thumbv7m-none-eabi",
+    "-mcpu=cortex-m3",
+    "-mthumb",
+    "-Os",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-fno-exceptions",
+    "-fno-rtti",
+    "-fno-threadsafe-statics",
+    "-nostdlib",
+    "-nostdinc",
+    "-std=gnu++14"
+  ],
+
+  "linkerFlags": [
+    "--gc-sections",
+    "-nostdlib"
+  ],
+
+  "defines": [
+    "ARDUINO=10819",
+    "ARDUINO_ARCH_STM32",
+    "ARDUINO_GENERIC_STM32F103C",
+    "STM32F1xx",
+    "STM32F103xB",
+    "USE_HAL_DRIVER",
+    "HAL_UART_MODULE_ENABLED"
+  ],
+
+  "includePaths": [
+    "/cores/arduino",
+    "/cores/arduino/stm32",
+    "/cores/arduino/api",
+    "/libraries/SrcWrapper/src",
+    "/system/Drivers/STM32F1xx_HAL_Driver/Inc",
+    "/system/Drivers/CMSIS/Device/ST/STM32F1xx/Include",
+    "/system/Drivers/CMSIS/Core/Include",
+    "/variants/STM32F1xx/F103C8T_F103CB"
+  ],
+
+  "requiresPreprocessing": true,
+  "fileExtension": ".ino"
+}
