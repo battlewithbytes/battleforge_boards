@@ -18,7 +18,6 @@
     "-fno-rtti",
     "-fno-threadsafe-statics",
     "-nostdlib",
-    "-nostdinc",
     "-std=gnu++14"
   ],
 
@@ -34,7 +33,10 @@
     "STM32F1xx",
     "STM32F103xB",
     "USE_HAL_DRIVER",
-    "HAL_UART_MODULE_ENABLED"
+    "HAL_UART_MODULE_ENABLED",
+    "__GNUC__=7",
+    "__GNUC_MINOR__=0",
+    "__GNUC_PATCHLEVEL__=0"
   ],
 
   "includePaths": [
