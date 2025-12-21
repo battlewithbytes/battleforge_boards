@@ -5,7 +5,7 @@
   "version": "2.8.1",
 
   "coreUrl": "/wasm/arduino/arduino-stm32f1-2.8.1.tar.gz",
-  "coreChecksum": "c3285ce753c927db88ab34102e5d797f6056df6d4c84e7b9a12844b3079369a3",
+  "coreChecksum": "223fa562231432799907a4f691e2a14e1527b89ca0f3a0cb644ebcff0cf12077",
 
   "compilerFlags": [
     "--target=thumbv7m-none-eabi",
@@ -44,6 +44,7 @@
     "/cores/arduino/stm32",
     "/cores/arduino/api",
     "/libraries/SrcWrapper/src",
+    "/libraries/SrcWrapper/inc",
     "/system/Drivers/STM32F1xx_HAL_Driver/Inc",
     "/system/Drivers/CMSIS/Device/ST/STM32F1xx/Include",
     "/system/Drivers/CMSIS/Core/Include",
