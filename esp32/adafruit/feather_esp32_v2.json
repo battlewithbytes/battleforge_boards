@@ -6,9 +6,9 @@
   "description": "The ESP32 Feather V2 is Adafruit's upgraded Feather ESP32, with 8MB Flash, 2MB PSRAM, USB-C, and a STEMMA QT connector.",
 
   "assets": {
-    "image": "https://cdn-learn.adafruit.com/assets/assets/000/111/179/original/adafruit_products_ESP32_Feather_V2_Top.jpg",
+    "image": "/images/boards/adafruit/feather_esp32_v2.jpg",
     "pinout": "https://cdn-learn.adafruit.com/assets/assets/000/111/204/original/adafruit_products_Adafruit_ESP32_Feather_V2_Pinout.png",
-    "thumbnail": "https://cdn-shop.adafruit.com/310x233/5400-00.jpg"
+    "thumbnail": "/images/boards/adafruit/feather_esp32_v2.jpg"
   },
 
   "documentation": {

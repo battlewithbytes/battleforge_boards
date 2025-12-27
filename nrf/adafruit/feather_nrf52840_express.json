@@ -5,7 +5,7 @@
   "vendor": "adafruit",
   "version": "1.0.0",
   "description": "Feather-format nRF52840 board with native USB, BLE 5.0, and UF2 bootloader. Perfect for portable Bluetooth projects.",
-  "image": "images/adafruit/feather_nrf52840.png",
+  "image": "/images/boards/adafruit/feather_nrf52840.png",
 
   "chip": {
     "platform": "nrf",

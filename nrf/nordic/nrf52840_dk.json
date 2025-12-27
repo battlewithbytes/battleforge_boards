@@ -5,7 +5,7 @@
   "vendor": "nordic",
   "version": "1.0.0",
   "description": "Official Nordic Semiconductor development kit for nRF52840. Full access to all pins, on-board debugger, Arduino shield compatible.",
-  "image": "images/nordic/nrf52840_dk.png",
+  "image": "/images/boards/nordic/nrf52840_dk.png",
 
   "chip": {
     "platform": "nrf",

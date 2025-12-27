@@ -5,7 +5,7 @@
   "vendor": "sparkfun",
   "version": "1.0.0",
   "description": "Feather-compatible nRF52840 board with Qwiic connector, USB-C, and LiPo charging. Great for BLE projects.",
-  "image": "images/sparkfun/thing_plus_nrf52840.png",
+  "image": "/images/boards/sparkfun/thing_plus_nrf52840.png",
 
   "chip": {
     "platform": "nrf",

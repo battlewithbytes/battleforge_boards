@@ -5,7 +5,7 @@
   "vendor": "espressif",
   "version": "1.0.0",
   "description": "Official Espressif ESP32 development board. Dual-core Xtensa, WiFi, Bluetooth, plenty of GPIO.",
-  "image": "images/espressif/esp32_devkitc.png",
+  "image": "/images/boards/espressif/esp32_devkitc.png",
 
   "chip": {
     "platform": "esp32",
