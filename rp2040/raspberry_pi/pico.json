@@ -5,7 +5,7 @@
   "vendor": "raspberry_pi",
   "version": "1.0.0",
   "description": "Official Raspberry Pi RP2040 board. Dual-core Cortex-M0+, 264KB RAM, PIO state machines, excellent documentation.",
-  "image": "/images/boards/raspberry_pi/pico.png",
+  "image": "/images/boards/raspberry_pi/pico.svg",
 
   "chip": {
     "platform": "rp2040",
